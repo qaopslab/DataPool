@@ -1,0 +1,49 @@
+<div class="default-container">
+    <form id="newDPPProcess" action="/{{this.env}}/addProcess" method="POST" onsubmit="return confirm('Please make sure you have the data set up for this process code in the Data Provider!')">
+        {{#if this.errMsg}}
+        <div class="alert alert-danger">
+            <strong>Error:&nbsp;
+                {{this.errMsg}}
+            </strong>
+        </div>
+        {{/if}}
+        <fieldset>
+            <legend>Process Details</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dataPoolProcess">Process Name:</label>
+                        <input class="form-control" id="dataPoolProcess" name="dataPoolProcess" value="{{data.dataPoolProcess}}" type="text" required/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dataType">Data Type:</label>
+                        <select class="form-control" id="dataType" name="dataType" type="text" required>
+                            <option value="Generic" {{#equal dataType "Generic"}} selected {{/equal}}>Generic</option>
+                            <option value="Specific" {{#equal dataType "Specific"}} selected {{/equal}}>Specific</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="processType">Process Code:</label>
+                        <input class="form-control" id="processType" name="processType" value="{{data.processType}}" type="text" required/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="requisiteType">Requisite Code:</label>
+                        <input class="form-control" id="requisiteType" name="requisiteType" value="{{data.requisiteType}}" type="text" required/>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="modal-footer">
+            <a href="/{{env}}/home" class="btn btn-primary">Back to Home</a>
+            <button class="btn btn-success pull-right" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

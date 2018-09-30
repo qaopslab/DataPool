@@ -1,0 +1,260 @@
+<div class="default-container">
+    {{#if errMsg}}
+    <div class="alert alert-danger">
+        <strong>Error:&nbsp;{{errMsg}}
+        </strong>
+    </div>
+    {{/if}}
+    <div id="paginatedTable" class="table-responsive" style="max-height: 500px; overflow-y: scroll; overflow-x:hidden;">
+        <table id="dataTable" class="table table-dark table-responsive table-striped table-bordered" style="border: 1px solid black">
+            <thead class="thead">
+                <tr>
+                    <th style="max-width:20rem; overflow: hidden">Data Pool Process</th>
+                    <th style="max-width:30rem; overflow: hidden">Description</th>
+                    <th style="max-width:10rem; overflow: hidden">Process Type</th>
+                    <th style="max-width:10rem; overflow: hidden">Requisite Type</th>
+                    <th style="max-width:10rem; overflow: hidden">Data Type</th>
+                    <th style="max-width:10rem; overflow: hidden">Threshold Limit</th>
+                    <th style="max-width:10rem; overflow: hidden">Primary TC Count</th>
+                    <th style="max-width:10rem; overflow: hidden">Secondary TC Count</th>
+                    <th style="max-width:10rem; overflow: hidden">Current Data Pool Count</th>
+                    <th style="max-width:10rem; overflow: hidden" hidden class="customColumn">Used Data Pool Count</th>
+                    <th style="max-width:10rem; overflow: hidden" {{#equal user "hide"}} hidden {{/equal}}></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <colgroup>
+                <col span="9">
+                <col>
+            </colgroup>
+            {{#each data}}
+            <tr>
+                <td style="max-width:20rem; overflow: hidden">{{dataPoolProcess}}</td>
+                <td style="max-width:30rem; overflow: hidden">{{description}}</td>
+                <td style="max-width:max-content; overflow: hidden">{{processCode}}</td>
+                <td style="max-width:max-content; overflow: hidden">{{requisiteCode}}</td>
+                <td style="max-width:10rem; overflow: hidden">{{dataType}}</td>
+                <td style="max-width:10rem; overflow: hidden">{{thresholdLimit}}</td>
+                <td style="max-width:10rem; overflow: hidden">{{primaryTCCount}}</td>
+                <td style="max-width:10rem; overflow: hidden">{{secondaryTCCount}}</td>
+                <td style="max-width:10rem; overflow: hidden" id="cc{{_id}}"></td>
+                <td style="max-width:10rem; overflow: hidden" id="uc{{_id}}" hidden class="customColumn"></td>
+                <td style="max-width:10rem" {{#equal ../user "hide"}} hidden {{/equal}}>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit{{_id}}">
+                        Edit
+                    </button>
+                    <div class="modal fade" id="edit{{_id}}" tabindex="-1" role="dialog" aria-labelledby="scModal" aria-hidden="true" style="color: black">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 style="text-align: center;" class="modal-title" id="scModal">
+                                        <strong>Data Pool Process Details</strong>
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editDPPProcess" action='/{{../env}}/editProcess' method="POST" onsubmit="return confirm('Are you sure you want to update the data with these details?')">
+                                        <fieldset>
+                                            <legend>Process Details</legend>
+                                            <input id="_id" name="_id" value="{{_id}}" style="visibility: hidden;">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="dataPoolProcess">Process Name:</label>
+                                                        <input class="form-control" name="dataPoolProcess" value={{dataPoolProcess}} type="text" readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="dataType">Data Type:</label>
+                                                        <select class="form-control" id="dataType" name="dataType" type="text" readonly required>
+                                                            <option>{{dataType}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tcCount">New Test Case Count:</label>
+                                                        <input class="form-control" id="tcCount" name="tcCount" type="text" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-success pull-right" type="submit">Submit</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <br/> {{#noteq user "hide"}}
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new">
+        Add new Data Pool Process
+    </button>
+    {{/noteq}}
+
+    <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="scModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 style="text-align: center;" class="modal-title" id="scModal">
+                        <strong>Data Pool Process Details</strong>
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form id="newDPPProcess" action="/{{env}}/addProcess" onsubmit="return valthis('envChkbx')" method="POST">
+                        <fieldset>
+                            <legend>Process Details</legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dataPoolProcess">Process Name:</label>
+                                        <input class="form-control" id="dataPoolProcess" name="dataPoolProcess" type="text" required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dataType">Data Type:</label>
+                                        <select class="form-control" id="dataType" name="dataType" type="text" required>
+                                            <option value="Generic">Generic</option>
+                                            <option value="Specific">Specific</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="description">Description:</label>
+                                        <input class="form-control" id="description" name="description" type="text" maxlength="200" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="processCode">Process Code:</label>
+                                        <input class="form-control" id="processCode" name="processCode" type="text" required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="requisiteCode">Requisite Code:</label>
+                                        <input class="form-control" id="requisiteCode" name="requisiteCode" type="text" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="env">Environment:</label>
+                                    <br/> SIT
+                                    <input class="envChkbx" name="env" type="checkbox" value="SIT">&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </div>
+                        </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                    <button class="btn btn-success pull-right" type="submit">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<script>
+
+    $(document).ready(function () {
+        putCurrentCount('{{ env }}');
+        putUsedCount('{{ env }}');
+    }
+    );
+
+</script>
+
+</script>
+
+<script type="text/javascript">
+    var datas = {{{ json data }}};
+
+    function putCurrentCount(_env) {
+        for (var i = 0; i < datas.length; i++) {
+            var id = datas[i]._id;
+            $.ajax({
+                url: '/getExistingCount/AJAXCurrentCount',
+                method: 'POST',
+                async: false,
+                data: {
+                    processCode: datas[i].processCode,
+                    env: _env,
+                    status: "new"
+                },
+                statusCode: {
+                    404: function () {
+                        document.getElementById('cc' + id).innerText = '0';
+                    }
+                },
+                success: (val) => {
+                    document.getElementById('cc' + id).innerText = val;
+                },
+            })
+        }
+    }
+
+    function putUsedCount(_env) {
+        for (var i = 0; i < datas.length; i++) {
+            var id = datas[i]._id;
+            $.ajax({
+                url: '/getExistingCount/AJAXUsedCount',
+                method: 'POST',
+                async: false,
+                data: {
+                    processCode: datas[i].processCode,
+                    env: _env,
+                    status: "used"
+                },
+                statusCode: {
+                    404: function () {
+                        document.getElementById('uc' + id).innerText = '0';
+                    }
+                },
+                success: (val) => {
+                    document.getElementById('uc' + id).innerText = val;
+                },
+            })
+        }
+    }
+
+    function valthis(val) {
+        var checkBoxes = document.getElementsByClassName(val);
+        var isChecked = false;
+        var i = 0;
+        for (i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+                isChecked = true;
+            };
+        };
+        if (isChecked == true) {
+            return true;
+        }
+        else {
+            alert('Please, check at least one checkbox for Environment!');
+            return false;
+        }
+    }
+
+</script>

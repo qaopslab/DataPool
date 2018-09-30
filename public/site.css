@@ -1,0 +1,136 @@
+body{
+    margin: 0;
+    width:100%;
+    height:100%;
+}
+    
+textarea{
+    resize: vertical;
+    overflow: auto;
+}
+
+section {
+    display: block;
+}
+
+.center-align{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    margin: 1rem 0px;
+    padding: 1em;
+    border-radius: 0.285714rem;
+}
+
+p{
+    color: rgb(255, 255, 255)
+}
+
+.top-pad{
+    padding-top: 10px;
+}
+
+.no-container {
+    margin-left: 0px;
+    margin-right: 0px; 
+}
+
+.default-container {
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+tr {
+   line-height: 25px;
+   min-height: 25px;
+   height: 25px;
+   overflow: hidden;
+}
+
+.head {
+    background-color: #000;
+    height: 50px;
+    width: 100%;
+    z-index: 2;
+    position: fixed;
+    font-size: 1.7em;
+    top: 0px;
+}
+
+nav{
+    margin-top: 50px;
+    padding:8px;
+    z-index: 2;
+    background-color: #000000;
+    position: fixed;
+    width: 100%;
+}
+
+nav ul{
+    list-style-type: none;
+    padding-left:0px;
+    margin:0px;
+}
+
+nav ul li{
+    display:inline-block;
+    background-color: #000000;
+}
+
+a {
+    color: white;
+}
+
+nav ul li a:hover{
+background-color: #B82601;
+}
+
+nav ul li a{
+    background-color: #062F4F;
+    color: #eee;
+    text-decoration: none;
+    padding:0 5px;	
+    font-weight:bold;
+    text-transform: uppercase;
+    font-size:13px;
+}
+
+.navbar-nav{
+    background-color: #062F4F;
+}
+
+.dropdown-menu{
+    background-color: #062F4F;
+}
+
+.dropdown-menu a{
+    background-color: #062F4F;
+    color: white;
+}
+
+.dropdown-menu a:hover{
+    background-color: #B82601;
+    color: white;
+}
+
+footer{
+    background-color: #000000;
+    color: #eee;
+    padding-top: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+}
+    
+footer h2{
+    margin: 0px;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+    
+.well .well{
+    background-color: white;
+}
