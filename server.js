@@ -291,7 +291,7 @@ app.get('*', function (req, res) {
 });
 
 //App listener
-app.listen(PORT, function () {
+app.listen(process.env.PORT || PORT, function () {
     console.log('Application is now running on port: ' + PORT);
 });
 
