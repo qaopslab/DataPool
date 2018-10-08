@@ -74,7 +74,7 @@ db.once('open', function callback() {
 app.set("view engine", ".hbs");
 
 //application post is set to 5250
-var PORT = process.env.port || 5250;
+var PORT = process.env.port || 8080;
 
 app.get('', function (req, res) {
     res.redirect('/' + env + '/home');
