@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Latest compiled and minified Bootstrap 3.3.7 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <title>Data Pool Dashboard</title>
+    <link rel="shortcut icon" href="/icon.png" />
+    <link rel="stylesheet" href="/site.css">
+</head>
+
+<body>
+    <div class="no-container">
+        <section class="head">
+            <div class="row" style="margin-left: 50px;">
+                <div class="col-md-5" style="padding-top: 3px">
+                    <p>Data Pool Dashboard</p>
+                </div>
+                <div class="col-md-2">
+                    <img class="center-block" src="" alt="Company Name"></img>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-1" style="padding-top: 3px">
+                    <p>{{{env}}}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <nav class="navbar navbar-default" style="margin-top:50px;">
+        <div class="container-fluid" style="margin-left: 50px; margin-right: 50px;">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a class="nav-link" href="/{{{env}}}/home">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Environment
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="/SIT/home">SIT</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {{#equal user "hide"}}
+                <li>
+                    <a id="signup" href="/signup">Signup</a>
+                </li>
+                <li>&nbsp;&nbsp;</li>
+                {{/equal}} {{#equal user "hide"}}
+                <li>
+                    <a id="login" href="/login">Login</a>
+                </li>
+                <li>&nbsp;&nbsp;</li>
+                {{/equal}} {{#noteq user "hide"}}
+                <li style="padding-top: 15px;">
+                    Hi {{user.name}}!
+                </li>
+                <li>
+                    <a id="logout" href="/logout">Logout</a>
+                </li>
+                <li>&nbsp;&nbsp;</li>
+                {{/noteq}} {{#equal show "show"}}
+                <li>
+                    <a id="usedCountBtn" onclick="toggleUsedColumn('{{{env}}}')">Show Used Count</a>
+                </li>
+                {{/equal}}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="no-container">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/> {{{body}}}
+    </div>
+
+    <footer>
+        <div class="row" style="margin-left: 50px">
+            <div class="col-md-12">
+                <h2>© Project Name - 2018</h2>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+<script>
+
+    function toggleUsedColumn(_env) {
+        var elems = document.getElementsByClassName('customColumn');
+        var btnText = document.getElementById('usedCountBtn');
+        var val = false;
+        if (elems[0].hidden == true) {
+            val = false;
+            btnText.innerText = "Hide Used Count";
+        }
+        else {
+            btnText.innerText = "Show Used Count";
+            val = true;
+        }
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].hidden = val;
+        }
+    }
+
+</script>

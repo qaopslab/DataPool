@@ -1,0 +1,28 @@
+<div class="" style="margin-left: 30%; margin-right: 30%">
+    <h3 class="center-align">Please login below
+    </h3>
+    {{#if errorMsg}}
+    <div class="alert alert-danger">
+        <strong>Error:&nbsp;{{errorMsg}}
+        </strong>
+    </div>
+    {{else}} {{/if}}
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <br/>
+            <form method="post" action="/login">
+                <label><strong>Username:</strong></label>
+                <input maxlength="50px" class="form-control" name="username" type="text">
+                <br/>
+                <label><strong>Password:</strong></label>
+                <input class="form-control" name="password" type="password">
+                <br/>
+                <div class="center-align">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
